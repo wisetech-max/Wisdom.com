@@ -1,9 +1,33 @@
 import handshake from "../video/handshake.mp4";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 function Contact() {
+  const formRef = useRef();
+  const [status, setStatus] = useState("idle");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      )
+      .then(() => {
+        setStatus("success");
+        formRef.current.reset();
+      })
+      .catch(() => {
+        setStatus("error");
+      });
+  };
+
   return (
     <section id="Contact" className="w-full bg-base-100 py-20 px-4 md:px-8">
-      {/* Main Container */}
       <div>
         <div className="w-full text-center mb-12 text-3xl font-bold text-base-content">
           <h1>Contact Me</h1>
@@ -52,7 +76,6 @@ function Contact() {
                     <p className="text-sm text-gray-300">Response Time</p>
                     <p className="font-semibold text-white">Within 24 Hours</p>
                   </div>
-
                   <div className="rounded-xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur-lg">
                     <p className="text-sm text-gray-300">Availability</p>
                     <p className="font-semibold text-white">
@@ -64,7 +87,11 @@ function Contact() {
 
               {/* Glassmorphism Form */}
               <div className="w-full">
-                <form className="rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                <form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  className="rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                >
                   <h2 className="mb-6 text-center text-2xl font-bold text-white">
                     Send a Message
                   </h2>
@@ -72,36 +99,53 @@ function Contact() {
                   <div className="space-y-5">
                     <input
                       type="text"
+                      name="from_name"
                       placeholder="Full Name"
+                      required
                       className="w-full rounded-xl border border-white/20 bg-white/10 p-4 text-white placeholder:text-gray-300 outline-none transition focus:border-blue-400"
                     />
 
                     <input
                       type="email"
+                      name="from_email"
                       placeholder="Email Address"
+                      required
                       className="w-full rounded-xl border border-white/20 bg-white/10 p-4 text-white placeholder:text-gray-300 outline-none transition focus:border-blue-400"
                     />
 
                     <input
                       type="text"
+                      name="project_type"
                       placeholder="Project Type"
                       className="w-full rounded-xl border border-white/20 bg-white/10 p-4 text-white placeholder:text-gray-300 outline-none transition focus:border-blue-400"
                     />
 
                     <textarea
                       rows="5"
+                      name="message"
                       placeholder="Tell me about your project..."
+                      required
                       className="w-full rounded-xl border border-white/20 bg-white/10 p-4 text-white placeholder:text-gray-300 outline-none transition focus:border-blue-400"
                     />
 
-                    <a href="mailto:onyedikauwakwe@gmail.com">
-                      <button
-                        type="submit"
-                        className="w-full rounded-xl bg-blue-600 py-4 font-semibold text-white transition hover:bg-blue-700"
-                      >
-                        Send Message
-                      </button>
-                    </a>
+                    <button
+                      type="submit"
+                      disabled={status === "sending"}
+                      className="w-full rounded-xl bg-blue-600 py-4 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {status === "sending" ? "Sending..." : "Send Message"}
+                    </button>
+
+                    {status === "success" && (
+                      <p className="text-center text-green-400 font-semibold">
+                        ✅ Message sent! I'll get back to you soon.
+                      </p>
+                    )}
+                    {status === "error" && (
+                      <p className="text-center text-red-400 font-semibold">
+                        ❌ Something went wrong. Please try again.
+                      </p>
+                    )}
                   </div>
                 </form>
               </div>
@@ -114,7 +158,7 @@ function Contact() {
           <div className="w-full max-w-6xl overflow-hidden rounded-3xl shadow-xl">
             <div className="w-full">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1883.8378634729393!2d3.2380115706372568!3d6.546753999959341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b85401e245ea7%3A0xb949edf4a6e302c!2s37a%20Shaba%20Ojo%20St%2C%20Ijegun%2C%20Lagos%20102213%2C%20Lagos!5e1!3m2!1sen!2sng!4v1755391781133!5m2!1sen!2sng"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1883.8378634729393!2d3.2380115706372568!3d6.546753999959341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sen!2sng!4v1755391781133!5m2!1sen!2sng"
                 className="w-full h-75 md:h-100 lg:h-125 rounded-xl shadow-lg border-0"
                 allowFullScreen
                 loading="lazy"
