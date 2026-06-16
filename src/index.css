@@ -1,0 +1,70 @@
+/* @import "tailwindcss";
+@plugin "daisyui"; */
+
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+}
+
+@keyframes slideLeftAnimation {
+  0% {
+    transform: translateX(-500px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-left {
+  animation: slideLeftAnimation 1.6s ease forwards;
+}
+
+@keyframes slideRightAnimation {
+  from {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-right {
+  animation: slideRightAnimation 1.9s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 70s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 80px;
+}
