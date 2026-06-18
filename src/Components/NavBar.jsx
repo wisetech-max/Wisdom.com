@@ -1,9 +1,12 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../Context/ThemeProvider";
 
 function NavBar() {
   const { theme, setTheme } = useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   return (
     <>
@@ -14,6 +17,7 @@ function NavBar() {
       >
         {/* LEFT */}
         <div className="navbar-start">
+          {/* MOBILE MENU */}
           <div className="dropdown lg:hidden">
             <label tabIndex={0} className="btn btn-ghost">
               <svg
@@ -32,7 +36,6 @@ function NavBar() {
               </svg>
             </label>
 
-            {/* MOBILE MENU */}
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-10 p-4 shadow-xl bg-base-200 rounded-2xl w-56 text-base-content"
@@ -53,10 +56,10 @@ function NavBar() {
                 <a href="#Contact">Contact</a>
               </li>
 
-              {/* THEME TOGGLE ONLY IN HAMBURGER */}
-              <li className="mt-2">
-                <div className="flex items-center justify-between px-1">
-                  <span className="flex items-center gap-2">
+              {/* MOBILE THEME TOGGLE */}
+              <li className="mt-3">
+                <div className="flex items-center justify-between">
+                  <span>
                     {theme === "dark" ? "🌙 Dark Mode" : "🌞 Light Mode"}
                   </span>
 
@@ -64,9 +67,7 @@ function NavBar() {
                     type="checkbox"
                     className="toggle bg-gray-300 checked:bg-blue-600"
                     checked={theme === "dark"}
-                    onChange={() =>
-                      setTheme(theme === "light" ? "dark" : "light")
-                    }
+                    onChange={toggleTheme}
                   />
                 </div>
               </li>
@@ -74,7 +75,7 @@ function NavBar() {
           </div>
 
           {/* LOGO */}
-          <a className="text-2xl font-extrabold tracking-wide">
+          <a className="text-2xl font-extrabold tracking-wide cursor-pointer">
             <span className="text-blue-600">Wisdom</span>
             <span className="text-base-content">.</span>
           </a>
@@ -102,8 +103,20 @@ function NavBar() {
         </div>
 
         {/* RIGHT */}
-        <div className="navbar-end flex items-center gap-3">
-          {/* CTA BUTTON ONLY (NO THEME HERE ANYMORE) */}
+        <div className="navbar-end flex items-center gap-4">
+          {/* DESKTOP THEME TOGGLE */}
+          <div className="hidden lg:flex items-center gap-2">
+            <span className="text-lg">{theme === "dark" ? "🌙" : "🌞"}</span>
+
+            <input
+              type="checkbox"
+              className="toggle bg-gray-300 checked:bg-blue-600"
+              checked={theme === "dark"}
+              onChange={toggleTheme}
+            />
+          </div>
+
+          {/* CTA BUTTON */}
           <a href="#Contact">
             <button className="btn rounded-full bg-blue-600 hover:bg-blue-700 text-white border-none px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-base whitespace-nowrap">
               Get a Quote
@@ -112,7 +125,7 @@ function NavBar() {
         </div>
       </div>
 
-      {/* spacer */}
+      {/* Spacer */}
       <div className="h-20"></div>
     </>
   );
