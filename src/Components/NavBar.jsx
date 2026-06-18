@@ -4,12 +4,13 @@ import { ThemeContext } from "../Context/ThemeProvider";
 
 function NavBar() {
   const { theme, setTheme } = useContext(ThemeContext);
+
   return (
     <>
       <div
-        className="navbar fixed top-0 left-0 z-50
-          bg-base-100/90 backdrop-blur-md shadow-md
-          border-b border-base-300"
+        className="navbar fixed top-0 left-0 z-50 w-full
+        bg-base-100/90 backdrop-blur-md shadow-md
+        border-b border-base-300"
       >
         {/* LEFT */}
         <div className="navbar-start">
@@ -31,49 +32,43 @@ function NavBar() {
               </svg>
             </label>
 
+            {/* MOBILE MENU */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-1 p-4 shadow-xl bg-base-200 rounded-2xl w-56 text-base-content"
+              className="menu menu-sm dropdown-content mt-3 z-10 p-4 shadow-xl bg-base-200 rounded-2xl w-56 text-base-content"
             >
               <li>
-                <a
-                  href="#Home"
-                  className="hover:text-blue-600 transition duration-300"
-                >
-                  Home
-                </a>
+                <a href="#Home">Home</a>
               </li>
               <li>
-                <a
-                  href="#About"
-                  className="hover:text-blue-600 transition duration-300"
-                >
-                  About
-                </a>
+                <a href="#About">About</a>
               </li>
               <li>
-                <a
-                  href="#Services"
-                  className="hover:text-blue-600 transition duration-300"
-                >
-                  Services
-                </a>
+                <a href="#Services">Services</a>
               </li>
               <li>
-                <a
-                  href="#Testimonials"
-                  className="hover:text-blue-600 transition duration-300"
-                >
-                  Testimonials
-                </a>
+                <a href="#Testimonials">Testimonials</a>
               </li>
               <li>
-                <a
-                  href="#Contact"
-                  className="hover:text-blue-600 transition duration-300"
-                >
-                  Contact
-                </a>
+                <a href="#Contact">Contact</a>
+              </li>
+
+              {/* THEME TOGGLE (MOBILE) */}
+              <li className="mt-2">
+                <div className="flex items-center justify-between px-1">
+                  <span className="flex items-center gap-2">
+                    {theme === "dark" ? "🌙 Dark Mode" : "🌞 Light Mode"}
+                  </span>
+
+                  <input
+                    type="checkbox"
+                    className="toggle bg-gray-300 checked:bg-blue-600"
+                    checked={theme === "dark"}
+                    onChange={() =>
+                      setTheme(theme === "light" ? "dark" : "light")
+                    }
+                  />
+                </div>
               </li>
             </ul>
           </div>
@@ -89,69 +84,47 @@ function NavBar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-3">
             <li>
-              <a
-                href="#Home"
-                className="font-semibold text-base-content hover:text-blue-600 transition duration-300"
-              >
-                Home
-              </a>
+              <a href="#Home">Home</a>
             </li>
             <li>
-              <a
-                href="#About"
-                className="font-semibold text-base-content hover:text-blue-600 transition duration-300"
-              >
-                About
-              </a>
+              <a href="#About">About</a>
             </li>
             <li>
-              <a
-                href="#Services"
-                className="font-semibold text-base-content hover:text-blue-600 transition duration-300"
-              >
-                Services
-              </a>
+              <a href="#Services">Services</a>
             </li>
             <li>
-              <a
-                href="#Testimonials"
-                className="font-semibold text-base-content hover:text-blue-600 transition duration-300"
-              >
-                Testimonials
-              </a>
+              <a href="#Testimonials">Testimonials</a>
             </li>
             <li>
-              <a
-                href="#Contact"
-                className="font-semibold text-base-content hover:text-blue-600 transition duration-300"
-              >
-                Contact
-              </a>
+              <a href="#Contact">Contact</a>
             </li>
           </ul>
         </div>
 
         {/* RIGHT */}
-        <div className="navbar-end gap-3">
-          <label className="flex items-center cursor-pointer gap-2">
-            <span className="text-base-content">🌞</span>
+        <div className="navbar-end flex items-center gap-3">
+          {/* DESKTOP THEME TOGGLE */}
+          <label className="hidden lg:flex items-center cursor-pointer gap-2">
+            <span>🌞</span>
             <input
               type="checkbox"
               className="toggle bg-gray-300 checked:bg-blue-600"
               checked={theme === "dark"}
               onChange={() => setTheme(theme === "light" ? "dark" : "light")}
             />
-            <span className="text-base-content">🌙</span>
+            <span>🌙</span>
           </label>
 
+          {/* CTA BUTTON */}
           <a href="#Contact">
-            <button className="btn rounded-full bg-blue-600 hover:bg-blue-700 text-white border-none px-6">
+            <button className="btn rounded-full bg-blue-600 hover:bg-blue-700 text-white border-none px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-base whitespace-nowrap">
               Get a Quote
             </button>
           </a>
         </div>
       </div>
 
+      {/* spacer for fixed navbar */}
       <div className="h-20"></div>
     </>
   );
