@@ -53,7 +53,7 @@ function NavBar() {
                 <a href="#Contact">Contact</a>
               </li>
 
-              {/* THEME TOGGLE (MOBILE) */}
+              {/* THEME TOGGLE ONLY IN HAMBURGER */}
               <li className="mt-2">
                 <div className="flex items-center justify-between px-1">
                   <span className="flex items-center gap-2">
@@ -103,19 +103,7 @@ function NavBar() {
 
         {/* RIGHT */}
         <div className="navbar-end flex items-center gap-3">
-          {/* DESKTOP THEME TOGGLE */}
-          <label className="hidden lg:flex items-center cursor-pointer gap-2">
-            <span>🌞</span>
-            <input
-              type="checkbox"
-              className="toggle bg-gray-300 checked:bg-blue-600"
-              checked={theme === "dark"}
-              onChange={() => setTheme(theme === "light" ? "dark" : "light")}
-            />
-            <span>🌙</span>
-          </label>
-
-          {/* CTA BUTTON */}
+          {/* CTA BUTTON ONLY (NO THEME HERE ANYMORE) */}
           <a href="#Contact">
             <button className="btn rounded-full bg-blue-600 hover:bg-blue-700 text-white border-none px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-base whitespace-nowrap">
               Get a Quote
@@ -124,7 +112,7 @@ function NavBar() {
         </div>
       </div>
 
-      {/* spacer for fixed navbar */}
+      {/* spacer */}
       <div className="h-20"></div>
     </>
   );
