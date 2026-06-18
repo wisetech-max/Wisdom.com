@@ -10,7 +10,7 @@ function Footer() {
           {/* Brand */}
           <div>
             <h1 className="text-3xl font-bold text-white">
-              Onyedika<span className="text-blue-500">.</span>
+              Wisdom<span className="text-blue-500">.</span>
             </h1>
 
             <p className="mt-5 leading-8 text-gray-400">
