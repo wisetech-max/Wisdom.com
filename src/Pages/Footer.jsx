@@ -1,3 +1,11 @@
+import { Mail } from "lucide-react";
+import { Smartphone } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+
 function Footer() {
   return (
     <footer className="relative overflow-hidden bg-slate-950 text-white">
@@ -24,19 +32,19 @@ function Footer() {
                 href="https://www.linkedin.com/in/onyedikachukwu-uwakwe-b30861208"
                 className="rounded-xl bg-white/10 p-3 transition hover:bg-blue-600 text-white"
               >
-                Linkedin
+                <FontAwesomeIcon icon={faLinkedin} />
               </a>
               <a
                 href="https://github.com/wisetech-max"
                 className="rounded-xl bg-white/10 p-3 transition hover:bg-blue-600 text-white"
               >
-                Github
+                <FontAwesomeIcon icon={faGithub} />
               </a>
               <a
                 href="https://x.com/wisetechmax"
                 className="rounded-xl bg-white/10 p-3 transition hover:bg-blue-600 text-white"
               >
-                X
+                <FontAwesomeIcon icon={faXTwitter} />
               </a>
             </div>
           </div>
@@ -94,9 +102,16 @@ function Footer() {
               Contact Info
             </h2>
             <div className="space-y-5 text-gray-400">
-              <p>📧 onyedikauwakwe@gmail.com</p>
-              <p>📱 +234 9086727803</p>
-              <p>📍 Lagos, Nigeria</p>
+              <p className="flex gap-1.5">
+                <Mail />
+                onyedikauwakwe@gmail.com
+              </p>
+              <p className="flex gap-1.5">
+                <Smartphone /> +234 9086727803
+              </p>
+              <p className="flex gap-1.5">
+                <MapPin /> Lagos, Nigeria
+              </p>
               <a
                 href="#contact"
                 className="inline-block rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
